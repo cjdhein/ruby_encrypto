@@ -1,2 +1,2 @@
 # ruby_encrypto
-Small rudimentary text file encryption / decryption utility.
+Rudimentary text file encryption / decryption utility using a version of the vigenère cipher.
