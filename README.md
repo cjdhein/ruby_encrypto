@@ -8,3 +8,8 @@ usage: ruby encrypto.rb {option | filename | keyword}
         filename: name of text file to encrypt or decrypt
         
         keyword: the keyword used to encrypt the file
+
+		
+If encrypting the file, the output file will be called "encrypted.txt"
+
+If decrypting the file, the output file will be called "decrypted.txt"

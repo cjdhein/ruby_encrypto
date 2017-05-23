@@ -1,11 +1,20 @@
+# Uses the Vigenère cipher to encrypt and decrypt a text file.
+# (See https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher for more info)
 
 
+# encrypts the provided file using the key provided
+# params: 	filename -> the text file to be encrypted
+#			key -> the key being used to encrypt
 def encrypt(filename, key)
 	
 	_original = File.open(filename, "r")
 	_encrypted = File.open("encrypted.txt", "w+")
+	
+	# initialize the keyword as an encryption key
 	_key = EncryptionKey.new(key)
 	
+	# loop through each line, and then each character, modifying it by the current key value
+	# then write the modified character to the output file
 	_original.each do |line|
 		line.split("").each do |originalChar|
 			temp = originalChar.ord
@@ -18,12 +27,20 @@ def encrypt(filename, key)
 end
 
 
+# decrypts the provided file using the key provided
+# params: 	filename -> the text file to be decrypted
+#			key -> the key being used to decrypt
 def decrypt(filename, key)
 	
 	_decrypted = File.open("decrypted.txt", "w+")
 	_encrypted = File.open(filename, "r")
+	
+	# initialize the keyword as an encryption key
 	_key = EncryptionKey.new(key)
 	
+	
+	# loop through each line, and then each character, modifying it by the current key value
+	# then write the modified character to the output file	
 	_encrypted.each do |line|
 		line.split("").each do |encryptedChar|
 			temp = encryptedChar.ord
@@ -36,7 +53,7 @@ def decrypt(filename, key)
 end
 
 
-
+# object representing the encryption keyword being used
 class EncryptionKey
 	
 	def initialize(key)
@@ -49,6 +66,7 @@ class EncryptionKey
 		end
 	end
 	
+	# returns the ascii integer value of the character the iterator is pointing to and then increments the iterator
 	def nextModVal()
 		temp = @valArray[@iterator]
 		
