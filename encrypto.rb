@@ -13,15 +13,21 @@ def encrypt(filename, key)
 	# initialize the keyword as an encryption key
 	_key = EncryptionKey.new(key)
 	
+	linecount =  1
+	
 	# loop through each line, and then each character, modifying it by the current key value
 	# then write the modified character to the output file
 	_original.each do |line|
+		charcount = 1
 		line.split("").each do |originalChar|
+			
 			temp = originalChar.ord
-			temp = temp + _key.nextModVal()
+			temp = (temp + _key.nextModVal()) % 256			
 			encryptedChar = temp.chr
 			_encrypted << encryptedChar
+			charcount += 1
 		end
+		linecount += 1
 	end
 	
 end
@@ -45,6 +51,10 @@ def decrypt(filename, key)
 		line.split("").each do |encryptedChar|
 			temp = encryptedChar.ord
 			temp = temp - _key.nextModVal()
+			
+			if temp < 0
+				temp = temp + 256
+			end
 			decryptedChar = temp.chr
 			_decrypted << decryptedChar
 		end
